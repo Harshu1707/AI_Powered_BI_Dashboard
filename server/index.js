@@ -27,7 +27,7 @@ const server = http.createServer(async (request, response) => {
       return sendJson(response, 200, {
         status: 'ok',
         geminiConfigured: isGeminiConfigured(),
-        database: 'embedded-sql-json',
+        database: 'sqlite',
         model: 'gemini-2.5-flash'
       });
     }

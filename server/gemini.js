@@ -21,8 +21,6 @@ Rules:
 - Never modify data.
 - Prefer aliases that are readable in a BI dashboard.
 - Include a LIMIT when the result may return detailed rows.
-- Supported GROUP BY dimensions are month via substr(order_date, 1, 7), region, product_category, channel, and customer_segment.
-- Avoid WHERE, CTEs, window functions, and nested subqueries in this demo project.
 
 Schema:
 ${schemaDescription}

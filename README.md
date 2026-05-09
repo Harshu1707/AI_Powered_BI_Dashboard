@@ -1,11 +1,11 @@
 # AI Powered BI Dashboard
 
-A full-stack business intelligence dashboard that combines **React**, **SQL-style analytics**, and the **Gemini 2.5 Flash API**. The app ships with a seeded SQL-style analytics warehouse, executive charts, and a natural-language question box that asks Gemini to generate safe read-only SQL.
+A full-stack business intelligence dashboard that combines **React**, **SQLite**, and the **Gemini 2.5 Flash API**. The app ships with a seeded SQL analytics warehouse, executive charts, and a natural-language question box that asks Gemini to generate safe read-only SQL.
 
 ## Features
 
 - React dashboard with KPI cards, revenue trends, region bars, and category mix charts.
-- Node.js API backed by a portable JSON analytics store and an embedded read-only SQL execution layer, so it runs on Windows/macOS/Linux without installing `sqlite3`.
+- Node.js API backed by SQLite through the local `sqlite3` command-line engine.
 - Gemini model integration using the Google Generative Language REST API with `gemini-2.5-flash`.
 - SQL guardrails that allow only single-statement `SELECT` queries against approved BI tables.
 - Deterministic fallback SQL when `GEMINI_API_KEY` is not configured, so the project works immediately.
@@ -15,7 +15,7 @@ A full-stack business intelligence dashboard that combines **React**, **SQL-styl
 - Frontend: React and Recharts loaded as browser ES modules
 - Backend: Node.js built-in HTTP server
 - AI: Google Gemini API (`gemini-2.5-flash`)
-- SQL layer: Embedded read-only analytics engine over seeded JSON tables
+- SQL database: SQLite
 
 ## Getting started
 
@@ -33,7 +33,7 @@ Open the app and API at <http://localhost:3001>.
 | --- | --- |
 | `GEMINI_API_KEY` | Google AI Studio API key used by Gemini 2.5 Flash. If omitted, fallback SQL is used. |
 | `PORT` | Dashboard and API port. Defaults to `3001`. |
-| `DATABASE_PATH` | Seeded analytics JSON path. Defaults to `./data/bi-dashboard.json`. |
+| `DATABASE_PATH` | SQLite database path. Defaults to `./data/bi-dashboard.db`. |
 
 ## Useful commands
 
@@ -46,8 +46,6 @@ npm test         # Run Node tests
 ## Notes
 
 The frontend imports React and Recharts as browser ES modules, so no package download is required for the committed source. The application still needs internet access in the browser the first time those modules are loaded from the CDN.
-
-The backend no longer shells out to a system `sqlite3` executable. This avoids the Windows `spawnSync sqlite3 ENOENT` startup error and keeps the SQL demo portable for users who only have Node.js installed.
 
 ## API endpoints
 
@@ -65,7 +63,7 @@ Example body for `/api/ask`:
 
 ## Data model
 
-The seeded analytics warehouse contains:
+The seeded SQLite warehouse contains:
 
 - `sales_orders` for revenue, cost, units, region, channel, category, and segment.
 - `marketing_spend` for campaign spend, impressions, and clicks.

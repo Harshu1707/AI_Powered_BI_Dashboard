@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "AI-powered BI dashboard using React, SQL-style analytics, and Gemini 2.5 Flash.",
+  "description": "AI-powered BI dashboard using React, SQLite, and Gemini 2.5 Flash.",
   "scripts": {
     "dev": "node server/index.js",
     "start": "node server/index.js",
